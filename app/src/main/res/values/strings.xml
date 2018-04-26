@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PokemonApp</string>
+    <string name="enter_pokemon_name">ENTER POKEMON NAME</string>
+    <string name="capture">CAPTURE!</string>
 </resources>
