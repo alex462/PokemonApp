@@ -14,6 +14,9 @@
         android:layout_marginBottom="43dp"
         android:layout_marginTop="32dp"
         android:hint="@string/enter_pokemon_name"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/capture_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,9 +26,11 @@
             android:id="@+id/pokemon_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:fontFamily="casual"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
             android:textStyle="bold" />
     </android.support.design.widget.TextInputLayout>
 
@@ -38,6 +43,7 @@
         android:text="@string/capture"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

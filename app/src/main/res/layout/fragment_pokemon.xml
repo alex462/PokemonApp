@@ -35,7 +35,7 @@
         tools:layout_editor_absoluteY="47dp" />
 
     <TextView
-        android:id="@+id/pokemon_effect_textView"
+        android:id="@+id/pokemon_summary_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -55,7 +55,7 @@
         android:layout_height="181dp"
         android:layout_marginBottom="32dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/pokemon_effect_textView"
+        app:layout_constraintBottom_toTopOf="@+id/pokemon_summary_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
