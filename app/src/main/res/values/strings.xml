@@ -2,4 +2,7 @@
     <string name="app_name">PokemonApp</string>
     <string name="enter_pokemon_name">ENTER POKEMON NAME</string>
     <string name="capture">CAPTURE!</string>
+    <string name="type">Type: %1$s</string>
+    <string name="effect">Effect: %1$s</string>
+    <string name="name">%1$s</string>
 </resources>

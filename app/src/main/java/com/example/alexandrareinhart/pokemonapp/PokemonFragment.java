@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -26,6 +28,7 @@ public class PokemonFragment extends Fragment {
     private String baseUrl = "http://pokeapi.co/api/v2/pokemon/";
     private Retrofit retrofit;
     private RetrofitPokemonApiCalls retrofitPokemonApiCalls;
+    String pokemonName;
 
 
     @BindView(R.id.pokemon_name_textView)
@@ -45,44 +48,52 @@ public class PokemonFragment extends Fragment {
         return view;
     }
 
+    public static PokemonFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        PokemonFragment fragment = new PokemonFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onStart() {
         super.onStart();
 
         String pokemonName = getArguments().getString(POKEMON_NAME);
         buildRetrofit();
-        makeApiCall(pokemonName);
+        makeApiCalls(pokemonName);
     }
 
-    private void makeApiCall(final String pokemonName) {
+    private void makeApiCalls(final String pokemonName) {
 
-        RetrofitPokemonApiCalls.getPokemon(pokemonName).enqueue(new Callback<RetrofitPokemonApiCalls.PokemonName>() {
+        retrofitPokemonApiCalls.getPokemonInfo(pokemonName).enqueue(new Callback<RetrofitPokemonApiCalls.PokemonInfo>() {
             @Override
                 public void onResponse
-                (Call < RetrofitPokemonApiCalls.PokemonName > call, Response < RetrofitPokemonApiCalls.PokemonName> response) {
+                (Call < RetrofitPokemonApiCalls.PokemonInfo > call, Response < RetrofitPokemonApiCalls.PokemonInfo> response) {
                 if (response.isSuccessful()) {
-                    pokemonNameTextView.setText(POKEMON_NAME);
-                    //TODO - set picture
-                    pokemonSummary.setText(response.body().getSummary());
+                    pokemonNameTextView.setText(response.body().getName());
+                    Glide.with(getContext()).load(response.body().getSprites().getDefaultImage()).into(pokemonPictureImageView);
+
+//                    makeSecondApiCall(response.body().getEffect());
                 } else {
                     Toast.makeText(getContext(), "YOU MISSED! TRY A DIFFERENT POKEMON.", Toast.LENGTH_LONG).show();
+//                    getSupportFragmentManager().beginTransaction().remove(R.id.fragment_holder, container).commit();
                 }
             }
             @Override
-            public void onFailure(Call<RetrofitPokemonApiCalls.PokemonName> call, Throwable t) {
+            public void onFailure(Call<RetrofitPokemonApiCalls.PokemonInfo> call, Throwable t) {
                 t.printStackTrace();
             }
-        }
+        });
     }
 
-    public static PokemonFragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        PokemonFragment fragment = new PokemonFragment();
-        fragment.setArguments(args);
-        return fragment;
+    private void makeSecondApiCall(int id) {
+
+//        retrofitPokemonApiCalls.getPokemonAbilities()
     }
+
 
     private void buildRetrofit() {
 
